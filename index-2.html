@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RoxEro Casino</title>
+    <link rel="icon" href="roxero-logo.jpg" type="image/jpeg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --card-bg: #141414;
+            --card-border: rgba(255, 255, 255, 0.06);
+            --gold: #d4a017;
+            --gold-light: #f0c14b;
+            --gold-badge: linear-gradient(135deg, #f0c14b, #c9a227);
+            --red: #e31c25;
+            --red-btn: #d32f2f;
+            --text: #ffffff;
+            --text-muted: #9a9a9a;
+            --text-desc: #7a7a7a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.4;
+            padding-bottom: 40px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 50% 0%, rgba(180, 30, 30, 0.15) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 40%, rgba(180, 30, 30, 0.08) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 16px 16px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 0 20px;
+        }
+
+        .header img {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 2px solid rgba(212, 160, 23, 0.5);
+            box-shadow: 0 0 20px rgba(212, 160, 23, 0.25);
+            object-fit: cover;
+        }
+
+        .tg-card {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(145deg, #1a1212 0%, #121212 100%);
+            border: 1px solid rgba(180, 40, 40, 0.25);
+            border-radius: 16px;
+            padding: 16px 14px;
+            margin-bottom: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tg-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(180, 30, 30, 0.08), transparent 60%);
+            pointer-events: none;
+        }
+
+        .tg-card:active {
+            transform: scale(0.98);
+        }
+
+        .tg-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-right: 14px;
+            flex-shrink: 0;
+        }
+
+        .tg-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .tg-content h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 3px;
+            letter-spacing: -0.2px;
+        }
+
+        .tg-content p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .tg-btn {
+            width: 42px;
+            height: 42px;
+            background: var(--red-btn);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-left: 10px;
+            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.4);
+        }
+
+        .tg-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 32px 0 18px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--gold-light);
+            text-transform: uppercase;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold));
+        }
+
+        .section-title::before {
+            left: 10%;
+            background: linear-gradient(90deg, transparent, var(--gold));
+        }
+
+        .section-title::after {
+            right: 10%;
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+
+        .sites-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .site-card {
+            background: linear-gradient(160deg, #1a1414 0%, #121010 100%);
+            border: 1px solid rgba(180, 40, 40, 0.2);
+            border-radius: 16px;
+            padding: 16px 14px;
+            position: relative;
+            overflow: hidden;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .site-card::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(180, 30, 30, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .site-card.vip {
+            border-color: rgba(180, 40, 40, 0.3);
+        }
+
+        .site-card.safe {
+            border-color: rgba(212, 160, 23, 0.25);
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: var(--gold-badge);
+            color: #1a1a1a;
+            letter-spacing: 0.3px;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+
+        .site-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            letter-spacing: -0.3px;
+        }
+
+        .site-card .desc {
+            font-size: 0.78rem;
+            color: var(--text-desc);
+            margin-bottom: auto;
+            padding-bottom: 12px;
+        }
+
+        .site-card img.gif {
+            width: 100%;
+            height: 90px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            object-fit: cover;
+            object-position: center center;
+            background: #0a0a0a;
+            display: block;
+        }
+
+        .incele {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--red);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: auto;
+        }
+
+        .incele:active {
+            opacity: 0.7;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 16px 10px;
+            color: #555;
+            font-size: 0.75rem;
+        }
+
+        @media (min-width: 520px) {
+            .container {
+                padding-top: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="roxero-logo.jpg" alt="RoxEro Casino">
+        </div>
+
+        <a href="https://t.me/RoxEroSohbet" target="_blank" rel="noopener" class="tg-card">
+            <div class="tg-icon">💬</div>
+            <div class="tg-content">
+                <h3>Sohbet Kanalı</h3>
+                <p>Topluluğa katıl ve sohbete dahil ol.</p>
+            </div>
+            <div class="tg-btn">
+                <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </div>
+        </a>
+
+        <a href="https://t.me/+xWRfqwHH_GBiYmVk" target="_blank" rel="noopener" class="tg-card">
+            <div class="tg-icon">📢</div>
+            <div class="tg-content">
+                <h3>Duyuru Kanalı</h3>
+                <p>Güncel duyuruları kaçırma.</p>
+            </div>
+            <div class="tg-btn">
+                <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
+            </div>
+        </a>
+
+        <div class="section-title">
+            <h2>VIP • KURALSIZ SİTELER</h2>
+        </div>
+
+        <div class="sites-grid">
+            <a href="http://tinyurl.com/9tsfyzf3?btag=2698487" target="_blank" rel="noopener" class="site-card vip" style="text-decoration:none;color:inherit;">
+                <span class="badge">VIP #01</span>
+                <img src="lordpalace.gif" alt="LordPalace" class="gif">
+                <h3>LordPalace</h3>
+                <p class="desc">250₺ deneme bonusu</p>
+                <span class="incele">İNCELE →</span>
+            </a>
+            <a href="https://onwin4701.com/?p=VhM9" target="_blank" rel="noopener" class="site-card vip" style="text-decoration:none;color:inherit;">
+                <span class="badge">VIP #02</span>
+                <img src="onwin.gif" alt="Onwin" class="gif">
+                <h3>Onwin</h3>
+                <p class="desc">1000₺ deneme bonusu</p>
+                <span class="incele">İNCELE →</span>
+            </a>
+            <a href="https://nggo.me/6CLIe2aexE" target="_blank" rel="noopener" class="site-card vip" style="text-decoration:none;color:inherit;">
+                <span class="badge">VIP #03</span>
+                <img src="yasalbahis.gif" alt="YasalBahis" class="gif">
+                <h3>YasalBahis</h3>
+                <p class="desc">%20 Kuralsız kayıp bonusu</p>
+                <span class="incele">İNCELE →</span>
+            </a>
+            <a href="https://yankibet105.com/tr?ref=roxero" target="_blank" rel="noopener" class="site-card vip" style="text-decoration:none;color:inherit;">
+                <span class="badge">VIP #04</span>
+                <img src="yankibet.gif" alt="Yankı Bet" class="gif">
+                <h3>Yankı Bet</h3>
+                <p class="desc">Sayı kuralsız güvenilir %25 kayıp</p>
+                <span class="incele">İNCELE →</span>
+            </a>
+            <a href="https://jasino.to/-8Xm" target="_blank" rel="noopener" class="site-card vip" style="text-decoration:none;color:inherit;">
+                <span class="badge">VIP #05</span>
+                <h3>Jasino</h3>
+                <p class="desc">2000₺ deneme bonusu kuralsız</p>
+                <span class="incele">İNCELE →</span>
+            </a>
+        </div>
+
+        <div class="section-title">
+            <h2>GÜVENİLİR SİTELER</h2>
+        </div>
+
+        <div class="sites-grid">
+            <div class="site-card safe">
+                <span class="badge">ÖNERİLEN #01</span>
+                <h3>Site Adı</h3>
+                <p class="desc">Güvenilir site bilgileri</p>
+                <a href="#" class="incele" onclick="return false;">İNCELE →</a>
+            </div>
+            <div class="site-card safe">
+                <span class="badge">ÖNERİLEN #02</span>
+                <h3>Site Adı</h3>
+                <p class="desc">Güvenilir site bilgileri</p>
+                <a href="#" class="incele" onclick="return false;">İNCELE →</a>
+            </div>
+            <div class="site-card safe">
+                <span class="badge">ÖNERİLEN #03</span>
+                <h3>Site Adı</h3>
+                <p class="desc">Güvenilir site bilgileri</p>
+                <a href="#" class="incele" onclick="return false;">İNCELE →</a>
+            </div>
+            <div class="site-card safe">
+                <span class="badge">ÖNERİLEN #04</span>
+                <h3>Site Adı</h3>
+                <p class="desc">Güvenilir site bilgileri</p>
+                <a href="#" class="incele" onclick="return false;">İNCELE →</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            © 2026 RoxEro Casino
+        </div>
+    </div>
+</body>
+</html>
